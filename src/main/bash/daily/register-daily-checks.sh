@@ -10,24 +10,24 @@ mysql -t -v -u${PROD_AWS_RDS_USERNAME} \
   -P${PROD_AWS_RDS_PORT} \
   -D${PROD_AWS_RDS_SCHEMA} < ${SQL_DIR}/register-daily-checks.sql
 
-printf "Health of umpg-register-prod-work-generator queue\n" 
+printf "Health of ${NAME} queue\n" 
 aws sqs get-queue-attributes \
-  --queue-url ${PROD_AWS_SQS_URL}/umpg-register-prod-work-record \
+  --queue-url ${PROD_AWS_SQS_URL}/${NAME} \
   --attribute-names All
 sleep 2
 MESSAGES=`aws sqs get-queue-attributes \
-  --queue-url ${PROD_AWS_SQS_URL}/umpg-register-prod-work-record \
+  --queue-url ${PROD_AWS_SQS_URL}/${NAME} \
   --attribute-names All | \
   grep ApproximateNumberOfMessages*`
 printf "Messages count= ${MESSAGES}\n"
 
-printf "Health of umpg-register-prod-work-generator-error queue\n"
+printf "Health of ${NAME}-error queue\n"
 aws sqs get-queue-attributes \
-  --queue-url ${PROD_AWS_SQS_URL}/umpg-register-prod-work-record-error \
+  --queue-url ${PROD_AWS_SQS_URL}/${PROD_APP_NAME}-error \
   --attribute-names All
 sleep 2
 MESSAGES=`aws sqs get-queue-attributes \
-  --queue-url ${PROD_AWS_SQS_URL}/umpg-register-prod-work-record-error \
+  --queue-url ${PROD_AWS_SQS_URL}/${NAME}-error \
   --attribute-names All | \
   grep ApproximateNumberOfMessages*`
 printf "Messages count= ${MESSAGES}\n"
