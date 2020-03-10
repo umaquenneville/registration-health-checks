@@ -1,6 +1,6 @@
 #!/bin/bash
 readonly CURRENT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-readonly SQL_DIR=`cd ../../sql/daily && pwd`;
+readonly SQL_DIR=$(cd ../../sql/daily && pwd);
 source ${CURRENT_DIR}/register-daily-checks.conf
 
 
