@@ -33,4 +33,4 @@ MESSAGES=`aws sqs get-queue-attributes \
 printf "Messages count= ${MESSAGES}\n"
 
 # todo add sentry
-#curl -H 'Authorization: Bearer ${auth_key}' http://sentry.umpgapps.com:8080/api/0/projects/sentry/register-prod/issues/?statsPeriod=24h | jq -r '.[].title' | sort | uniq -c > log/register-prod-last24hr.log
+#curl -H 'Authorization: Bearer ${auth_key}' http://sentry/api/0/projects/sentry/?statsPeriod=24h | jq -r '.[].title' | sort | uniq -c > log/last24hr.log
